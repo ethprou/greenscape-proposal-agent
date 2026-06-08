@@ -4,6 +4,7 @@ node_modules/
 out/
 coverage/
 .vercel/
+tsconfig.tsbuildinfo
 
 # Local secrets
 .env
@@ -12,4 +13,3 @@ coverage/
 # Candidate packet source files are intentionally kept out of the public repo.
 L&S - *.pdf
 job posting.rtfd/
-
