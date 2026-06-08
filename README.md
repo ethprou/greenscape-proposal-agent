@@ -6,8 +6,8 @@ The project builds the P0 agent recommended in [STRATEGY.md](./STRATEGY.md): a h
 
 ## Submission Links
 
-- Deployed URL: _pending Vercel deployment_
-- GitHub repo: _pending publish_
+- Deployed URL: https://licenseandscaletest.vercel.app
+- GitHub repo: https://github.com/ethprou/greenscape-proposal-agent
 - Loom: _pending recording_
 - Strategy doc: [STRATEGY.md](./STRATEGY.md)
 
@@ -78,6 +78,13 @@ vercel --prod
 
 Use Supabase, Neon, Vercel Postgres, or another managed Postgres database for `DATABASE_URL`. The schema is available in [database/schema.sql](./database/schema.sql), and `npm run db:setup` can create it automatically.
 
+Current production deployment is reachable, but production proposal generation requires `DATABASE_URL`, `OPENAI_API_KEY`, and `SLACK_WEBHOOK_URL` to be added in Vercel.
+
 ## Architecture
 
 See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
+
+## Walkthrough Prep
+
+- [docs/LOOM_SCRIPT.md](./docs/LOOM_SCRIPT.md)
+- [docs/INTERVIEW_PREP.md](./docs/INTERVIEW_PREP.md)
