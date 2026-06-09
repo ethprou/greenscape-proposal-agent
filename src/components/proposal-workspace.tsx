@@ -44,7 +44,7 @@ const emptyForm: FormState = {
   email: "maya@example.com",
   address: "4128 E Campbell Ave, Phoenix, AZ",
   leadSource: "Meta lead form",
-  projectType: "Premium backyard patio, pergola, fire pit, lighting",
+  projectType: "Patio, pergola, fire pit, lighting",
   budgetMin: "42000",
   budgetMax: "58000",
   desiredTimeline: "Ready before late October family visit",
@@ -515,4 +515,3 @@ export function ProposalWorkspace({ configStatus, initialError, initialProposals
     </main>
   );
 }
-
