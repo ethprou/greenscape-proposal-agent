@@ -8,7 +8,7 @@ The project builds the P0 agent recommended in [STRATEGY.md](./STRATEGY.md): a h
 
 - Deployed URL: https://licenseandscaletest.vercel.app
 - GitHub repo: https://github.com/ethprou/greenscape-proposal-agent
-- Loom: _pending recording_
+- Loom: Provided separately in the submission email
 - Strategy doc: [STRATEGY.md](./STRATEGY.md)
 
 ## What It Does
