@@ -78,7 +78,7 @@ vercel --prod
 
 Use Supabase, Neon, Vercel Postgres, or another managed Postgres database for `DATABASE_URL`. The schema is available in [database/schema.sql](./database/schema.sql), and `npm run db:setup` can create it automatically.
 
-Current production deployment is reachable, but production proposal generation requires `DATABASE_URL`, `OPENAI_API_KEY`, and `SLACK_WEBHOOK_URL` to be added in Vercel.
+The production deployment is configured with Neon Postgres, OpenAI, and Slack webhook environment variables. A live `gpt-5.4-mini` proposal generation has been verified end-to-end with Slack notification status `sent`.
 
 ## Architecture
 

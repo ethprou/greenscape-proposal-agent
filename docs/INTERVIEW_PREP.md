@@ -50,7 +50,7 @@ Connect GHL, ingest the real pricing sheet, add proposal quality evals, and buil
 1. Open deployed URL.
 2. Point out env status pills.
 3. Open strategy doc and explain ranking.
-4. Submit sample Arcadia site-walk notes if secrets are configured.
+4. Submit a sample site-walk or open the existing Nina Patel demo draft.
 5. Show review draft sections and guardrail flags.
 6. Approve or request revision.
 7. Show Slack notification and explain Postgres persistence.

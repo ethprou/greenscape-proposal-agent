@@ -26,15 +26,13 @@ When I generate the draft, the API validates the intake, saves the record to Pos
 
 The output is built for founder review: scope sections, pricing review items, assumptions, exclusions, customer questions, Carlos render brief, and a Marcus-style follow-up message. Nothing is sent to the customer automatically."
 
-Show: form, generated/ready draft if credentials are configured. If recording before secrets are added, say:
-
-"This production deployment is currently waiting on secrets, so the UI shows missing environment configuration instead of pretending to generate fake data. Locally and in production, once `DATABASE_URL`, `OPENAI_API_KEY`, and `SLACK_WEBHOOK_URL` are set, this path runs end-to-end."
+Show: form, generate a new draft or open the existing Nina Patel demo draft. Then show the Slack message that was sent to the review channel.
 
 ## 2:45-3:45 - Architecture Decisions
 
 "I used Next.js on Vercel because the take-home required a public deployment and this keeps the UI and server routes in one deployable app. I used Postgres instead of local storage because the workflow needs persistent audit history. The schema stores the original intake, AI draft, guardrails, model, token usage, Slack status, approval notes, and timestamps.
 
-For AI, I used the OpenAI Responses API with strict structured output. That means the app expects a known JSON shape instead of scraping free-form prose. I still validate the model output with Zod before saving.
+For AI, I used the OpenAI Responses API with strict structured output on `gpt-5.4-mini`. That means the app expects a known JSON shape instead of scraping free-form prose. I still validate the model output with Zod before saving.
 
 For the external integration I used Slack webhook notifications, because Marcus and Jenna already work through Slack. In a production implementation, the next integration would be GHL: write the approved proposal note and task back onto the opportunity."
 
@@ -51,4 +49,3 @@ The main trade-off is that this prototype uses a representative pricing category
 "With another week, I would do four things: first, connect GHL so new site-walk notes and approved proposal drafts write back to the CRM; second, ingest the real pricing spreadsheet; third, add eval fixtures for approved/rejected proposals; fourth, add the Post-Sign Momentum Agent because faster quoting will create more signed jobs that need deposit, HOA, permit, and scheduling follow-through.
 
 That's the build. It attacks the highest-leverage bottleneck, keeps the founder in the loop, and creates persistent operating data instead of a one-off demo."
-
