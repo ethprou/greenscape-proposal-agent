@@ -37,7 +37,7 @@ export const pricingCatalog = [
   },
   {
     category: "Permits, HOA, and design",
-    examples: ["HOA packet", "permit revision", "3D render", "final design signoff"]
+    examples: ["HOA packet", "permit revision", "CompanyCam measurement review", "final design signoff"]
   }
 ];
 
@@ -46,4 +46,3 @@ export function formatPricingCatalogForPrompt() {
     .map((item) => `- ${item.category}: ${item.examples.join(", ")}`)
     .join("\n");
 }
-

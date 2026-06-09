@@ -65,7 +65,7 @@ export const proposalDraftSchema = z.object({
   exclusions: z.array(z.string().min(1)),
   assumptions: z.array(z.string().min(1)),
   customerQuestions: z.array(z.string().min(1)),
-  carlosRenderBrief: z.string().min(1),
+  quoteReviewBrief: z.string().min(1),
   followUpMessage: z.string().min(1),
   internalHandoff: z.string().min(1),
   confidence: confidenceScore,
@@ -94,7 +94,7 @@ export type GuardrailFlag = {
 
 export type GuardrailResult = {
   requiresHumanApproval: boolean;
-  requiresRender: boolean;
+  requiresVisualReview: boolean;
   readyToSend: boolean;
   flags: GuardrailFlag[];
 };
@@ -126,7 +126,7 @@ export const openAiProposalJsonSchema = {
     "exclusions",
     "assumptions",
     "customerQuestions",
-    "carlosRenderBrief",
+    "quoteReviewBrief",
     "followUpMessage",
     "internalHandoff",
     "confidence",
@@ -165,7 +165,7 @@ export const openAiProposalJsonSchema = {
     exclusions: { type: "array", items: { type: "string" } },
     assumptions: { type: "array", items: { type: "string" } },
     customerQuestions: { type: "array", items: { type: "string" } },
-    carlosRenderBrief: { type: "string" },
+    quoteReviewBrief: { type: "string" },
     followUpMessage: { type: "string" },
     internalHandoff: { type: "string" },
     confidence: {

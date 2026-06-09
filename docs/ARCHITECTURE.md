@@ -2,14 +2,14 @@
 
 ## Goal
 
-The P0 agent compresses Greenscape Pro's quote cycle by turning site-walk notes into a proposal package Marcus can review instead of drafting from a blank Google Doc.
+The P0 agent compresses Stoneridge Outdoor Living's quote cycle by turning site-visit notes into a proposal package Marcus can review instead of drafting from a blank document and spreadsheet workflow.
 
 ## Data Flow
 
 1. Jenna or Marcus enters lead details and site-walk notes in the dashboard.
 2. The API validates the input and writes a `generating` proposal record to Postgres.
-3. OpenAI generates a strict JSON proposal draft using the Greenscape context and pricing-category catalog.
-4. The guardrail layer adds deterministic checks: render required, missing budget, low confidence, pricing review, and HOA/permit/utility dependencies.
+3. OpenAI generates a strict JSON proposal draft using the Stoneridge context and pricing-category catalog.
+4. The guardrail layer adds deterministic checks: visual/measurement review required, missing budget, low confidence, pricing review, and HOA/permit/utility dependencies.
 5. The completed draft, model, token usage, guardrails, and Slack notification status are persisted.
 6. Slack receives a review notification with a link back to the app.
 7. Marcus approves or requests revision. The decision is persisted and approval can also notify Slack.
@@ -25,7 +25,7 @@ The P0 agent compresses Greenscape Pro's quote cycle by turning site-walk notes 
 ## Guardrails
 
 - Never sends directly to a customer.
-- Flags any project at or above $30K for a Carlos render.
+- Flags larger or complex projects for CompanyCam/photo, measurement, and spreadsheet review.
 - Treats missing budget/timeline as review risks.
 - Blocks low-confidence drafts.
 - Blocks line items marked as needing spreadsheet verification.
