@@ -482,6 +482,11 @@ button:disabled {
   gap: 8px;
 }
 
+.flag {
+  max-width: 100%;
+  white-space: normal;
+}
+
 .flag-info {
   background: var(--surface-muted);
   color: var(--muted);
