@@ -36,20 +36,20 @@ type FormState = {
 };
 
 const exampleNotes =
-  "Walked the backyard with homeowner and captured photos in CompanyCam. They want to replace the cracked concrete patio with pavers, add a modern shade pergola, install pet-friendly turf, improve drainage near the back wall, and add low-voltage lighting along the new walkway. HOA likely required because pergola height may be visible from the street. Access is through a narrow side gate, so material staging needs planning. Customer cares most about clean finished look, reliable communication, and having the space ready before Thanksgiving.";
+  "Walked the Arcadia backyard with homeowner. They want to replace the cracked concrete patio with travertine, add a shaded pergola over the dining area, run a gas line to a rectangular fire pit, refresh irrigation around the citrus trees, and add low-voltage lighting along the new paver path. HOA likely required because pergola is visible from side street. Access is through a narrow side gate, so material staging needs planning. Customer cares most about clean finished look and having the space ready before a family visit in late October.";
 
 const emptyForm: FormState = {
-  customerName: "Nina Patel",
-  phone: "(704) 555-0184",
-  email: "nina@example.com",
-  address: "5530 Providence Rd, Charlotte, NC",
+  customerName: "Maya Reynolds",
+  phone: "(480) 555-0142",
+  email: "maya@example.com",
+  address: "4128 E Campbell Ave, Phoenix, AZ",
   leadSource: "Meta lead form",
-  projectType: "Paver patio, pergola, turf, drainage, lighting",
-  budgetMin: "22000",
-  budgetMax: "36000",
-  desiredTimeline: "Before Thanksgiving if HOA approvals move quickly",
+  projectType: "Premium backyard patio, pergola, fire pit, lighting",
+  budgetMin: "42000",
+  budgetMax: "58000",
+  desiredTimeline: "Ready before late October family visit",
   siteWalkNotes: exampleNotes,
-  internalNotes: "Qualified lead. Mention premium finish, communication, HOA dependency, access planning, and that Marcus will verify measurements/pricing before final proposal."
+  internalNotes: "Customer liked the Desert Modern project photos. Mention premium communication and render before final proposal."
 };
 
 function money(value: number | null) {
@@ -190,7 +190,7 @@ function DraftPanel({
         </span>
         <span>
           <ShieldCheck aria-hidden="true" />
-          {proposal.guardrails?.requiresVisualReview ? "Review required" : "No review flag"}
+          {proposal.guardrails?.requiresRender ? "Render required" : "No render flag"}
         </span>
       </div>
 
@@ -250,8 +250,8 @@ function DraftPanel({
           </section>
 
           <section>
-            <h3>Quote Review Brief</h3>
-            <p>{proposal.draft.quoteReviewBrief}</p>
+            <h3>Carlos Render Brief</h3>
+            <p>{proposal.draft.carlosRenderBrief}</p>
           </section>
 
           <section>
@@ -288,7 +288,7 @@ function DraftPanel({
             <textarea
               id="approval-notes"
               onChange={(event) => setNotes(event.target.value)}
-              placeholder="Example: Verify drainage allowance, CompanyCam measurements, and spreadsheet pricing before sending."
+              placeholder="Example: Verify gas line allowance and have Carlos render pergola view before sending."
               value={notes}
             />
             {error ? <div className="error-box">{error}</div> : null}
@@ -381,11 +381,11 @@ export function ProposalWorkspace({ configStatus, initialError, initialProposals
       <section className="top-band">
         <div className="top-content">
           <div>
-            <span className="eyebrow">Stoneridge Outdoor Living</span>
+            <span className="eyebrow">Greenscape Pro</span>
             <h1>Quote-to-Proposal Agent</h1>
             <p>
               Turn site-walk notes into a review-ready proposal package, with pricing guardrails,
-              quote-review handoff, persistent history, and Slack review notifications.
+              render handoff, persistent history, and Slack review notifications.
             </p>
           </div>
           <div className="config-panel" aria-label="Configuration status">
@@ -407,7 +407,7 @@ export function ProposalWorkspace({ configStatus, initialError, initialProposals
               <span className="eyebrow">New site walk</span>
               <h2>Draft a proposal</h2>
             </div>
-            <button className="icon-button" title="Use sample Stoneridge notes" type="button" onClick={() => setForm(emptyForm)}>
+            <button className="icon-button" title="Use sample Arcadia notes" type="button" onClick={() => setForm(emptyForm)}>
               <FileText aria-hidden="true" />
             </button>
           </div>
@@ -515,3 +515,4 @@ export function ProposalWorkspace({ configStatus, initialError, initialProposals
     </main>
   );
 }
+

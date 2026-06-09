@@ -2,13 +2,13 @@ import { Pool } from "pg";
 import { requireDatabaseUrl } from "./config";
 
 declare global {
-  var stoneridgePool: Pool | undefined;
-  var stoneridgeSchemaReady: Promise<void> | undefined;
+  var greenscapePool: Pool | undefined;
+  var greenscapeSchemaReady: Promise<void> | undefined;
 }
 
 export function getPool() {
-  if (!globalThis.stoneridgePool) {
-    globalThis.stoneridgePool = new Pool({
+  if (!globalThis.greenscapePool) {
+    globalThis.greenscapePool = new Pool({
       connectionString: requireDatabaseUrl(),
       ssl:
         process.env.DATABASE_URL?.includes("localhost") ||
@@ -19,12 +19,12 @@ export function getPool() {
     });
   }
 
-  return globalThis.stoneridgePool;
+  return globalThis.greenscapePool;
 }
 
 export async function ensureSchema() {
-  if (!globalThis.stoneridgeSchemaReady) {
-    globalThis.stoneridgeSchemaReady = getPool().query(`
+  if (!globalThis.greenscapeSchemaReady) {
+    globalThis.greenscapeSchemaReady = getPool().query(`
       CREATE TABLE IF NOT EXISTS proposals (
         id TEXT PRIMARY KEY,
         status TEXT NOT NULL,
@@ -46,5 +46,6 @@ export async function ensureSchema() {
     `).then(() => undefined);
   }
 
-  return globalThis.stoneridgeSchemaReady;
+  return globalThis.greenscapeSchemaReady;
 }
+

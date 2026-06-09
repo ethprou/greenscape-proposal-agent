@@ -2,12 +2,12 @@
 
 ## One-Sentence Summary
 
-I built a human-in-the-loop quote-to-proposal agent for Stoneridge Outdoor Living that turns site-visit notes into structured proposal drafts, stores the workflow in Postgres, and notifies Slack for founder review.
+I built a human-in-the-loop quote-to-proposal agent for Greenscape Pro that turns site-walk notes into structured proposal drafts, stores the workflow in Postgres, and notifies Slack for founder review.
 
 ## Why P0 Is Quoting
 
 - The client is not lead constrained. Meta and Google are already producing volume.
-- The bottleneck is Marcus converting site-visit notes, CompanyCam photo context, measurements, and spreadsheet pricing into proposals.
+- The bottleneck is Marcus converting site-walk notes into proposals.
 - Proposal turnaround is 6-9 days.
 - 35-40% of qualified leads are reportedly lost to faster competitors.
 - Site walks close at roughly 70%+, so qualified proposal-stage speed is highly leveraged.
@@ -31,7 +31,7 @@ I built a human-in-the-loop quote-to-proposal agent for Stoneridge Outdoor Livin
 It has high upside, but it injects more demand into a funnel that is already proposal-constrained. Fix proposal throughput first, then reactivate old demand.
 
 **Why not automate final pricing?**  
-The real pricing spreadsheet was not provided, and Stoneridge is premium-positioned. Guessing final numbers would be a trust and margin risk. The prototype maps to pricing categories and flags human price review.
+The real pricing spreadsheet was not provided, and Greenscape is premium-positioned. Guessing final numbers would be a trust and margin risk. The prototype maps to pricing categories and flags human price review.
 
 **What breaks first at scale?**  
 Serverless Postgres pool management and prompt quality. I would use a managed serverless Postgres driver or pooling layer, add evals, and write approved outputs back to GHL.

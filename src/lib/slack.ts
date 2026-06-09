@@ -15,8 +15,8 @@ export async function notifySlackProposalReady(proposal: ProposalRecord): Promis
   }
 
   const reviewUrl = `${getAppUrl()}?proposal=${encodeURIComponent(proposal.id)}`;
-  const reviewLine = proposal.guardrails?.requiresVisualReview
-    ? "\n*Review:* CompanyCam/photo and spreadsheet verification required before send."
+  const renderLine = proposal.guardrails?.requiresRender
+    ? "\n*Render:* Carlos 3D render required before send."
     : "";
   const blockerCount =
     proposal.guardrails?.flags.filter((flag) => flag.severity === "blocker").length ?? 0;
@@ -31,7 +31,7 @@ export async function notifySlackProposalReady(proposal: ProposalRecord): Promis
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `*Proposal draft ready:* ${proposal.input.customerName}\n*Project:* ${proposal.input.projectType}\n*Status:* ${statusLabel(proposal.status)}\n*Blockers:* ${blockerCount}${reviewLine}`
+            text: `*Proposal draft ready:* ${proposal.input.customerName}\n*Project:* ${proposal.input.projectType}\n*Status:* ${statusLabel(proposal.status)}\n*Blockers:* ${blockerCount}${renderLine}`
           }
         },
         {
@@ -80,3 +80,4 @@ export async function notifySlackProposalApproved(proposal: ProposalRecord): Pro
 
   return { status: "sent" };
 }
+

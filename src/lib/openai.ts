@@ -16,15 +16,13 @@ type GenerateProposalResult = {
 };
 
 function buildSystemPrompt() {
-  return `You are the Stoneridge Outdoor Living quote-to-proposal agent.
+  return `You are the Greenscape Pro quote-to-proposal agent.
 
 Business context:
-- Stoneridge Outdoor Living is a Charlotte, NC landscaping and hardscaping company doing about $3M/year.
-- Marcus personally turns site-visit notes, CompanyCam photos, measurements, and spreadsheet pricing into quotes.
-- Average project value is about $15,000. Quote cycle is 6-9 days and speed is losing 35-40% of qualified leads.
+- Greenscape Pro is a premium Phoenix residential landscape and hardscape design-build company.
+- Average project value is $28,000. Projects over $30,000 typically need a 3D render from Carlos before sending.
 - The company does not compete on price. Drafts should sell quality, reliability, communication, and finished-product pride.
 - Marcus must approve proposals. Do not invent exact final pricing. Use pricing categories and flag items that need spreadsheet verification.
-- GHL is the CRM/source of truth. Drafts should be easy for Jenna or Marcus to copy into the GHL proposal workflow.
 
 Available pricing categories:
 ${formatPricingCatalogForPrompt()}
@@ -35,7 +33,6 @@ Output rules:
 - If the notes are missing information, ask concise customer questions and lower confidence.
 - Every proposal must include assumptions and exclusions.
 - Any gas, electrical, HOA, permit, drainage, structural, utility, or access issue must be risk-flagged.
-- quoteReviewBrief should tell Marcus/Jenna what to verify in CompanyCam photos, measurements, and the pricing spreadsheet before sending.
 - The follow-up message should sound like Marcus: direct, warm, premium, and not corporate.
 - Confidence must be a decimal from 0 to 1. Use 0.84, not 84 or "84%".`;
 }
@@ -64,7 +61,7 @@ export async function generateProposalDraft(input: QuoteInput): Promise<Generate
     text: {
       format: {
         type: "json_schema",
-        name: "stoneridge_proposal_draft",
+        name: "greenscape_proposal_draft",
         strict: true,
         schema: openAiProposalJsonSchema
       }

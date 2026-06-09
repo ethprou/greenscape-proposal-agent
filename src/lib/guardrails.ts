@@ -1,6 +1,6 @@
 import type { GuardrailFlag, GuardrailResult, ProposalDraft, QuoteInput } from "./schema";
 
-const VISUAL_REVIEW_THRESHOLD = 30000;
+const RENDER_THRESHOLD = 30000;
 
 function notesContain(input: QuoteInput, pattern: RegExp) {
   return pattern.test(
@@ -10,12 +10,12 @@ function notesContain(input: QuoteInput, pattern: RegExp) {
   );
 }
 
-export function requiresVisualReview(input: QuoteInput) {
-  if (input.budgetMax !== null && input.budgetMax >= VISUAL_REVIEW_THRESHOLD) {
+export function requiresRender(input: QuoteInput) {
+  if (input.budgetMax !== null && input.budgetMax >= RENDER_THRESHOLD) {
     return true;
   }
 
-  return notesContain(input, /companycam|photo|measure|outdoor kitchen|pergola|water feature|structural|drainage|slope/);
+  return notesContain(input, /render|3d|outdoor kitchen|pergola|water feature|structural/);
 }
 
 export function evaluateProposalGuardrails(
@@ -23,7 +23,7 @@ export function evaluateProposalGuardrails(
   draft: ProposalDraft
 ): GuardrailResult {
   const flags: GuardrailFlag[] = [];
-  const visualReviewRequired = requiresVisualReview(input);
+  const renderRequired = requiresRender(input);
 
   if (input.budgetMin === null || input.budgetMax === null) {
     flags.push({
@@ -41,11 +41,11 @@ export function evaluateProposalGuardrails(
     });
   }
 
-  if (visualReviewRequired) {
+  if (renderRequired) {
     flags.push({
-      code: "visual_review_required",
+      code: "render_required",
       severity: "warning",
-      message: "Marcus/Jenna should verify CompanyCam photos, measurements, and spreadsheet assumptions before send."
+      message: "Project should receive a Carlos 3D render before proposal send."
     });
   }
 
@@ -85,8 +85,9 @@ export function evaluateProposalGuardrails(
 
   return {
     requiresHumanApproval: true,
-    requiresVisualReview: visualReviewRequired,
+    requiresRender: renderRequired,
     readyToSend: false,
     flags
   };
 }
+

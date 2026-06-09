@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { evaluateProposalGuardrails, requiresVisualReview } from "./guardrails";
+import { evaluateProposalGuardrails, requiresRender } from "./guardrails";
 import { proposalDraftSchema, type ProposalDraft, type QuoteInput } from "./schema";
 
 const baseInput: QuoteInput = {
-  customerName: "Nina Patel",
-  phone: "(704) 555-0184",
-  email: "nina@example.com",
-  address: "5530 Providence Rd, Charlotte, NC",
+  customerName: "Maya Reynolds",
+  phone: "(480) 555-0142",
+  email: "maya@example.com",
+  address: "4128 E Campbell Ave, Phoenix, AZ",
   leadSource: "Meta lead form",
   projectType: "Patio refresh",
   budgetMin: 12000,
@@ -38,35 +38,35 @@ const baseDraft: ProposalDraft = {
   exclusions: ["Permit fees unless required by city review"],
   assumptions: ["Access is available through side yard"],
   customerQuestions: ["Confirm preferred paver color."],
-  quoteReviewBrief: "Verify CompanyCam measurements and pricing spreadsheet categories before send.",
+  carlosRenderBrief: "No render required based on current scope.",
   followUpMessage: "Thanks for walking the yard with me. We have a clear path forward.",
   internalHandoff: "Verify final square footage before proposal send.",
   confidence: 0.86,
   riskFlags: []
 };
 
-describe("requiresVisualReview", () => {
-  it("requires visual review for budgets at or above the complex-project threshold", () => {
-    expect(requiresVisualReview({ ...baseInput, budgetMax: 30000 })).toBe(true);
+describe("requiresRender", () => {
+  it("requires a render for budgets at or above the Marcus/Carlos threshold", () => {
+    expect(requiresRender({ ...baseInput, budgetMax: 30000 })).toBe(true);
   });
 
-  it("requires visual review when complex scope appears in notes", () => {
+  it("requires a render when complex visual scope appears in notes", () => {
     expect(
-      requiresVisualReview({
+      requiresRender({
         ...baseInput,
         budgetMax: 18000,
-        siteWalkNotes: `${baseInput.siteWalkNotes} Add a pergola, drainage correction, and outdoor kitchen.`
+        siteWalkNotes: `${baseInput.siteWalkNotes} Add a pergola and outdoor kitchen.`
       })
     ).toBe(true);
   });
 
-  it("does not require visual review for simple sub-threshold work", () => {
-    expect(requiresVisualReview(baseInput)).toBe(false);
+  it("does not require a render for simple sub-threshold work", () => {
+    expect(requiresRender(baseInput)).toBe(false);
   });
 });
 
 describe("evaluateProposalGuardrails", () => {
-  it("flags visual review and approval dependencies", () => {
+  it("flags render and approval dependencies", () => {
     const result = evaluateProposalGuardrails(
       {
         ...baseInput,
@@ -77,8 +77,8 @@ describe("evaluateProposalGuardrails", () => {
     );
 
     expect(result.requiresHumanApproval).toBe(true);
-    expect(result.requiresVisualReview).toBe(true);
-    expect(result.flags.map((flag) => flag.code)).toContain("visual_review_required");
+    expect(result.requiresRender).toBe(true);
+    expect(result.flags.map((flag) => flag.code)).toContain("render_required");
     expect(result.flags.map((flag) => flag.code)).toContain("approval_dependency");
   });
 

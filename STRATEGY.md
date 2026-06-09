@@ -1,46 +1,86 @@
-# Stoneridge Outdoor Living AI Agent Strategy
+# Greenscape Pro AI Agent Strategy
 
-Assumption: GHL remains the operating source of truth. The first agent should create reviewable quote/proposal drafts and GHL-ready handoff data, not force Marcus and Jenna into a new daily system.
+Assumption: GHL remains the operating source of truth. Agents should create reviewable drafts and tasks, not force the team into a new daily system.
 
-## P0 Choice: Quote-to-Proposal Agent
+## 1. Quote-to-Proposal Agent
 
-Purpose: Compress Stoneridge's 6-9 day quote cycle by turning Marcus's site-visit notes, CompanyCam photos context, measurements, and pricing-spreadsheet assumptions into a review-ready proposal draft.
+Purpose: Convert Marcus's site-walk notes into a structured proposal draft within hours instead of 6-9 days.
 
-- Extracts project scope, customer priorities, measurements still needed, assumptions, exclusions, and risk flags from messy site-visit notes.
-- Maps requested work to pricing categories and flags human spreadsheet verification instead of inventing exact final pricing.
-- Creates a quote review brief for Marcus/Jenna: what to verify in CompanyCam, what to check in the spreadsheet, and what dependencies affect send-readiness.
-- Produces a client-ready follow-up draft in Marcus's voice, but keeps the proposal in human approval before anything is sent.
-- Notifies Slack when a draft is ready and stores the full workflow in Postgres.
+- Extracts project scope, materials, assumptions, exclusions, timeline, and decision risks from site-walk notes.
+- Maps requested work to pricing categories and flags missing details instead of inventing numbers.
+- Marks projects over $30K as "render required" and creates a Carlos handoff brief.
+- Produces a founder-review draft with confidence score, risk flags, and client-ready language.
+- Notifies Slack when a draft is ready for approval.
 
-Replaces/unblocks: Marcus being the only person who can turn site visits into quote/proposal packages.
+Replaces/unblocks: Marcus personally turning every site-walk note into a proposal from scratch.
 
-Estimated ROI: The transcript says 35-40% of qualified leads are lost to competitors who quote faster. The auditor note estimates roughly $200K/week of pipeline at risk. Even recovering a small fraction of those delayed quotes is more valuable than the lower-leverage pain points. With a ~$15K average project value, recovering 10 projects is ~$150K revenue before considering the compounding benefit of faster crew scheduling.
+Estimated ROI: If 35-40% of qualified leads are being lost to faster quotes, even recovering 10 signed projects at the $28K average is $280K in revenue. The upside is likely much larger because quote speed is constraining a $3.8M design-build revenue stream.
 
-Why this is #1: Lead volume is not the problem. Meta ROAS is healthy and Marcus admits he cannot keep up with the leads he already has. Quote speed is the highest-leverage constraint because it sits directly between qualified demand and signed work.
+Priority rationale: This is the biggest hole in the bucket. Lead volume and close quality are not the problem; proposal cycle time is. This also unlocks later agents because cleaner scope data improves follow-up, handoffs, and customer updates.
 
-## What I Would Build Next
+## 2. Post-Sign Momentum Agent
 
-1. **Post-Sign Momentum Agent**  
-   Tracks HOA approvals, permits, deposits, and start-readiness after a customer signs. Jenna says 6-10 projects are often stuck in this limbo, and each delay blocks crew scheduling and cash collection.
+Purpose: Move signed customers through deposit, HOA, permit, and schedule readiness without Jenna manually chasing every dependency.
 
-2. **Closed-Lost Reactivation Agent**  
-   Personalizes outreach to the 1,400+ closed-lost leads in GHL. Marcus has manually recovered 3-4 deals when he worked the list, but it takes a weekend and does not happen consistently.
+- Tracks each signed job by deposit, HOA, permit, final design, and start-date readiness.
+- Generates customer-specific nudges for unpaid deposits and HOA packet follow-up.
+- Escalates stuck jobs to Jenna or Marcus with reason, age, and next action.
+- Summarizes blocked revenue by stage.
 
-3. **Customer Progress Update Agent**  
-   Converts CompanyCam/project activity into customer-facing updates so customers stop calling Jenna asking what is happening. This protects Stoneridge's premium positioning and reduces operational noise.
+Replaces/unblocks: Jenna's manual chasing and Marcus's unclear scheduling pipeline.
 
-4. **Lead Qualification Agent**  
-   Filters tire-kickers before Marcus or Jenna spends time on them. It saves time, but it is lower priority than quote throughput because quote speed is losing already-qualified leads.
+Estimated ROI: 8-12 projects in limbo at $28K average means $224K-$336K of delayed revenue at any moment. Pulling even one week out of the delay improves cash flow and crew utilization.
 
-5. **Crew Coaching / Upsell Copilot**  
-   Helps installers price and escalate add-ons instead of doing free work. This is real money, but the transcript estimates roughly $104K/year, which is materially smaller than quote-cycle pipeline risk.
+Priority rationale: High operational leverage, but it starts after the sale. It should follow quote acceleration because faster proposals create more signed jobs entering this workflow.
 
-## Explicit Pushback
+## 3. Closed-Lost Reactivation Agent
 
-I would not build a content/marketing agent now. Marcus wants more posting, but the call makes clear social produces only a few leads per month and the actual acquisition engine is already working. More demand would worsen the bottleneck until quote throughput improves.
+Purpose: Reopen old opportunities with personal-feeling Marcus-style SMS/email from GHL history.
 
-I also would not build a fully autonomous instant-quote bot. Stoneridge's pricing spreadsheet is Marcus-specific, the company is premium-positioned, and wrong pricing creates trust and margin risk. The right first build is a human-in-the-loop proposal drafting system: AI handles the blank-page and structure work, while Marcus/Jenna retain final review and pricing judgment.
+- Scores 1,400+ closed-lost leads by project size, timing, and prior conversation quality.
+- Writes context-aware reactivation messages that reference the original backyard/project.
+- Queues messages for Brittany or Marcus approval before sending through GHL.
+- Tracks replies, booked calls, and recovered pipeline.
 
-## Production Notes
+Replaces/unblocks: Sporadic mass re-engagement blasts that do not feel personal.
 
-The take-home implementation proves the workflow with Postgres persistence, OpenAI structured generation, deterministic guardrails, and Slack notification. In production, I would connect the approved draft and follow-up task back into GHL because Jenna explicitly said everything has to live there to get used.
+Estimated ROI: A 2% recovery rate on 1,400 leads is 28 projects. At $28K average project value, that is $784K in latent revenue before margin.
+
+Priority rationale: Very high upside and low delivery risk, but it adds demand into a funnel that is already quote-constrained. It should come after proposal speed improves.
+
+## 4. Customer Progress Update Agent
+
+Purpose: Turn Jobber milestones and CompanyCam photos into consistent customer updates without Marcus recording Looms manually.
+
+- Watches project milestones/photo activity and drafts weekly or milestone-based updates.
+- Converts crew check-ins into plain-English customer messages.
+- Flags jobs with no customer-facing update in 3+ days.
+- Sends Marcus-branded updates after review or via approved templates.
+
+Replaces/unblocks: Inbound "what is happening?" calls to Jenna and inconsistent mid-project communication.
+
+Estimated ROI: Lower support load, fewer anxious clients, and more referrals. Harder to quantify than sales agents, but customer communication is a premium-positioning differentiator Marcus already knows works.
+
+Priority rationale: Strong adoption fit and customer impact, but it does not recover as much immediate revenue as quote speed, post-sign movement, or reactivation.
+
+## 5. Office Approval / Change Order Copilot
+
+Purpose: Give Jenna a Marcus-style rulebook for small approvals, add-ons, refunds, and pricing questions.
+
+- Captures Marcus's decision rules for common office questions.
+- Drafts recommended answers with confidence and "ask Marcus" thresholds.
+- Builds a searchable approval history so the rulebook improves over time.
+- Escalates only high-dollar, unusual, or low-confidence decisions.
+
+Replaces/unblocks: 5-10 daily Slack pings to Marcus for decisions Jenna could make with a clear framework.
+
+Estimated ROI: Saves Marcus roughly 30-60 minutes per workday and reduces operational drag. It also protects margin on add-ons and refunds.
+
+Priority rationale: This is valuable, but lower direct revenue leverage than the first four. It is #5 because it improves founder capacity rather than directly accelerating sales or cash collection.
+
+## Required Pushback
+
+My #1 agrees with Marcus on the business bottleneck, but not with the likely founder-shaped solution. I would not build a fully autonomous "instant quote" bot that invents prices or sends proposals without review. The right P0 is a quote-to-proposal approval system: it compresses the slowest human step while keeping Marcus accountable for premium scope, pricing judgment, and customer trust.
+
+The agent I considered but excluded is a marketing/content agent. Marcus wants daily posting, but he also said lead volume is not the constraint and Meta ROAS is healthy. More content would create more demand for a funnel that cannot quote fast enough. I would revisit content only after proposal throughput and post-sign operations are stable.
+

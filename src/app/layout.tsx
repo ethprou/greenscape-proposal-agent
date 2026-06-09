@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Stoneridge Proposal Agent",
-  description: "AI proposal drafting workflow for Stoneridge Outdoor Living"
+  title: "Greenscape Proposal Agent",
+  description: "AI proposal drafting workflow for Greenscape Pro"
 };
 
 export default function RootLayout({
@@ -17,3 +17,4 @@ export default function RootLayout({
     </html>
   );
 }
+
