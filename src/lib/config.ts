@@ -14,7 +14,7 @@ export function getConfigStatus(): ConfigStatus {
     openai: Boolean(process.env.OPENAI_API_KEY),
     slack: Boolean(process.env.SLACK_WEBHOOK_URL),
     appUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-    model: process.env.OPENAI_MODEL || "gpt-4.1-mini"
+    model: process.env.OPENAI_MODEL || "gpt-5.4-mini"
   };
 }
 
@@ -41,6 +41,5 @@ export function getAppUrl() {
 }
 
 export function getOpenAiModel() {
-  return process.env.OPENAI_MODEL || "gpt-4.1-mini";
+  return process.env.OPENAI_MODEL || "gpt-5.4-mini";
 }
-

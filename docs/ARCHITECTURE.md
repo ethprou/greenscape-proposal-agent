@@ -33,7 +33,7 @@ The P0 agent compresses Greenscape Pro's quote cycle by turning site-walk notes 
 
 ## Cost Considerations
 
-The default model is `gpt-4.1-mini` because this is a structured drafting task, not deep reasoning. OpenAI's model page lists `gpt-4.1-mini` as supporting the Responses API and structured outputs, with a 1M-token context window. The pricing page lists it at $0.40 per 1M input tokens and $1.60 per 1M output tokens, so a normal site-walk draft should cost far below the value of a single recovered proposal. The model is configurable through `OPENAI_MODEL`, and token usage is stored on every draft for auditability.
+The default model is `gpt-5.4-mini`. The job is not just reformatting text: it has to interpret messy site-walk notes, identify risk, draft premium client-facing language, produce an internal handoff, and stay inside a strict schema. A mini-class GPT-5 model is the right balance: stronger judgment than older mini models while still keeping latency and cost reasonable. OpenAI's model page recommends GPT-5.4 mini for lower-latency, lower-cost workloads, and the pricing page lists standard pricing at $0.75 per 1M input tokens and $4.50 per 1M output tokens. The model is configurable through `OPENAI_MODEL`, and token usage is stored on every draft for auditability.
 
 ## Scale Risks
 
@@ -41,4 +41,3 @@ The default model is `gpt-4.1-mini` because this is a structured drafting task, 
 - The representative pricing catalog should be replaced with Marcus's real 200-line spreadsheet or a GHL/Sheets integration before production.
 - Slack is enough for the take-home external integration, but production adoption depends on writing the proposal artifact back to GHL.
 - Prompt quality will improve after collecting Marcus-approved/rejected examples and turning those into evaluation fixtures.
-

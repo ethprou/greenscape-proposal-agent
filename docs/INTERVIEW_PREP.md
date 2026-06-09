@@ -40,7 +40,7 @@ Serverless Postgres pool management and prompt quality. I would use a managed se
 The brief required at least one external integration. Slack is fast and relevant to their operating flow. Production should add GHL because the client explicitly said everything must live in GHL.
 
 **Why this model?**  
-The default is `gpt-4.1-mini` because this is a structured drafting task, and the app stores model plus token usage for cost review. If draft quality is insufficient, upgrade to `gpt-4.1` or a GPT-5 mini-class model behind the same interface.
+The default is `gpt-5.4-mini`. The task is not merely returning the same information in a different shape; it requires judgment over messy notes, risk detection, brand-appropriate proposal language, and structured output discipline. A mini-class GPT-5 model gives better quality than older mini models while keeping cost and latency reasonable. The app stores model plus token usage for review, and `OPENAI_MODEL` can be changed without code changes.
 
 **What would you do with another week?**  
 Connect GHL, ingest the real pricing sheet, add proposal quality evals, and build the Post-Sign Momentum Agent next.
@@ -62,4 +62,3 @@ Connect GHL, ingest the real pricing sheet, add proposal quality evals, and buil
 - Do not call the pricing catalog real client pricing.
 - Do not narrate code line by line.
 - Do not over-defend using AI tooling. They said AI tooling is allowed; focus on decisions and ownership.
-
