@@ -172,6 +172,7 @@ main {
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: var(--shadow);
+  min-width: 0;
 }
 
 .intake-panel,
@@ -389,12 +390,14 @@ button:disabled {
 .draft-content {
   display: grid;
   gap: 20px;
+  min-width: 0;
   padding: 22px;
 }
 
 .draft-content section {
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .draft-content h3 {
@@ -407,6 +410,7 @@ button:disabled {
 .draft-content li {
   color: var(--muted);
   line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .draft-content ul {
@@ -462,6 +466,8 @@ button:disabled {
   display: flex;
   font-size: 0.82rem;
   min-height: 44px;
+  min-width: 0;
+  overflow-wrap: anywhere;
   padding: 10px;
 }
 
@@ -562,7 +568,7 @@ button:disabled {
   }
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1320px) {
   .workspace-shell {
     grid-template-columns: minmax(300px, 410px) minmax(0, 1fr);
   }
