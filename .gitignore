@@ -15,3 +15,6 @@ next-env.d.ts
 # Candidate packet source files are intentionally kept out of the public repo.
 L&S - *.pdf
 job posting.rtfd/
+
+# Personal submission prep notes are local only.
+.submission-prep/

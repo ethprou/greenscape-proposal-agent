@@ -83,8 +83,3 @@ The production deployment is configured with Neon Postgres, OpenAI, and Slack we
 ## Architecture
 
 See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
-
-## Walkthrough Prep
-
-- [docs/LOOM_SCRIPT.md](./docs/LOOM_SCRIPT.md)
-- [docs/INTERVIEW_PREP.md](./docs/INTERVIEW_PREP.md)
