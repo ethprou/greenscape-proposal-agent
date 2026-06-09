@@ -1,0 +1,13 @@
+.DS_Store
+.env
+.env*.local
+.git
+.next
+node_modules
+out
+coverage
+tsconfig.tsbuildinfo
+next-env.d.ts
+*.dmg
+L&S - *.pdf
+job posting.rtfd
