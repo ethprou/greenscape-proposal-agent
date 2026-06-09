@@ -26,7 +26,7 @@ When I generate the draft, the API validates the intake, saves the record to Pos
 
 The output is built for founder review: scope sections, pricing review items, assumptions, exclusions, customer questions, Carlos render brief, and a Marcus-style follow-up message. Nothing is sent to the customer automatically."
 
-Show: form, generate a new draft or open the existing Nina Patel demo draft. Then show the Slack message that was sent to the review channel.
+Show: form, generate a new draft or open the existing Maya Reynolds demo draft. Then show the Slack message that was sent to the review channel.
 
 ## 2:45-3:45 - Architecture Decisions
 
