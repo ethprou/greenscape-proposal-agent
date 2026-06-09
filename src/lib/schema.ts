@@ -9,6 +9,17 @@ const nullableMoney = z.preprocess((value) => {
   return Number.isNaN(parsed) ? value : parsed;
 }, z.number().nonnegative().nullable());
 
+const confidenceScore = z.preprocess((value) => {
+  const parsed =
+    typeof value === "string" && value.trim() !== "" ? Number(value) : value;
+
+  if (typeof parsed === "number" && parsed > 1 && parsed <= 100) {
+    return parsed / 100;
+  }
+
+  return parsed;
+}, z.number().min(0).max(1));
+
 export const quoteInputSchema = z.object({
   customerName: z.string().trim().min(2, "Customer name is required."),
   phone: z.string().trim().optional().default(""),
@@ -57,7 +68,7 @@ export const proposalDraftSchema = z.object({
   carlosRenderBrief: z.string().min(1),
   followUpMessage: z.string().min(1),
   internalHandoff: z.string().min(1),
-  confidence: z.number().min(0).max(1),
+  confidence: confidenceScore,
   riskFlags: z.array(riskFlagSchema)
 });
 
@@ -157,7 +168,12 @@ export const openAiProposalJsonSchema = {
     carlosRenderBrief: { type: "string" },
     followUpMessage: { type: "string" },
     internalHandoff: { type: "string" },
-    confidence: { type: "number" },
+    confidence: {
+      type: "number",
+      minimum: 0,
+      maximum: 1,
+      description: "Decimal confidence score from 0 to 1. Example: 0.84, not 84."
+    },
     riskFlags: {
       type: "array",
       items: {
@@ -172,4 +188,3 @@ export const openAiProposalJsonSchema = {
     }
   }
 } as const;
-

@@ -33,7 +33,8 @@ Output rules:
 - If the notes are missing information, ask concise customer questions and lower confidence.
 - Every proposal must include assumptions and exclusions.
 - Any gas, electrical, HOA, permit, drainage, structural, utility, or access issue must be risk-flagged.
-- The follow-up message should sound like Marcus: direct, warm, premium, and not corporate.`;
+- The follow-up message should sound like Marcus: direct, warm, premium, and not corporate.
+- Confidence must be a decimal from 0 to 1. Use 0.84, not 84 or "84%".`;
 }
 
 function buildUserPrompt(input: QuoteInput) {
@@ -81,4 +82,3 @@ export async function generateProposalDraft(input: QuoteInput): Promise<Generate
     throw new Error(`OpenAI returned an invalid proposal draft: ${toErrorMessage(error)}`);
   }
 }
-

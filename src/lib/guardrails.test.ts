@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { evaluateProposalGuardrails, requiresRender } from "./guardrails";
-import type { ProposalDraft, QuoteInput } from "./schema";
+import { proposalDraftSchema, type ProposalDraft, type QuoteInput } from "./schema";
 
 const baseInput: QuoteInput = {
   customerName: "Maya Reynolds",
@@ -108,3 +108,10 @@ describe("evaluateProposalGuardrails", () => {
   });
 });
 
+describe("proposalDraftSchema", () => {
+  it("normalizes percentage-style confidence scores from model output", () => {
+    const parsed = proposalDraftSchema.parse({ ...baseDraft, confidence: 85 });
+
+    expect(parsed.confidence).toBe(0.85);
+  });
+});
